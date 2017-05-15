@@ -14,11 +14,10 @@
 # limitations under the License.
 #
 
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+LOCAL_PATH := $(call my-dir)
 
-# Inherit from hardware-specific part of the product configuration
-$(call inherit-product, device/zte/p826n33/device.mk)
-$(call inherit-product-if-exists, vendor/zte/p826n33/p826n33-vendor.mk)
+ifeq ($(TARGET_DEVICE),p826n33)
 
-# Inherit some common CM stuff
+include $(call all-makefiles-under,$(LOCAL_PATH))
+
+endif

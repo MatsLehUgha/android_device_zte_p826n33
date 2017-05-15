@@ -14,11 +14,22 @@
 # limitations under the License.
 #
 
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+ifeq ($(TARGET_DEVICE),zte)
 
-# Inherit from hardware-specific part of the product configuration
-$(call inherit-product, device/zte/p826n33/device.mk)
-$(call inherit-product-if-exists, vendor/zte/p826n33/p826n33-vendor.mk)
+LOCAL_PATH := $(call my-dir)
 
-# Inherit some common CM stuff
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := wcnss_zte_client.c
+
+LOCAL_C_INCLUDES += hardware/qcom/wlan/wcnss_service
+LOCAL_CFLAGS += -Wall
+
+LOCAL_SHARED_LIBRARIES := libc libcutils libutils liblog libqminvapi
+
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE := libwcnss_qmi
+
+include $(BUILD_SHARED_LIBRARY)
+
+endif

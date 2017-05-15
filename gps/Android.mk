@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015 The CyanogenMod Project
+# Copyright (C) 2014 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,11 +14,8 @@
 # limitations under the License.
 #
 
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+LOCAL_PATH := $(call my-dir)
 
-# Inherit from hardware-specific part of the product configuration
-$(call inherit-product, device/zte/p826n33/device.mk)
-$(call inherit-product-if-exists, vendor/zte/p826n33/p826n33-vendor.mk)
-
-# Inherit some common CM stuff
+ifeq ($(TARGET_DEVICE),p826n33)
+include $(call all-subdir-makefiles,$(LOCAL_PATH))
+endif
